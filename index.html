@@ -2,10 +2,32 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="refresh" content="0;url=https://t.me/Info_aboutyou_bot/aboutme?startapp=a_3QzL1MCHbbvSDcbWc6c9Nj_lp">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Открываем приложение</title>
-<style>html,body{margin:0;min-height:100%;background:#fff}</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>html,body{margin:0;min-height:100%;background:#fff}body{font-family:Arial,sans-serif}#fallback{display:none;min-height:100dvh;align-items:center;justify-content:center;text-align:center;padding:20px;box-sizing:border-box}a{display:inline-block;background:#2481cc;color:white;padding:15px 20px;border-radius:12px;text-decoration:none;font-weight:700}</style>
 </head>
-<body></body>
+<body>
+<div id="fallback"><a id="go" href="https://t.me/Info_aboutyou_bot/aboutme?startapp=a_3QzL1MCHbbvSDcbWc6c9Nj_lp">Открыть мини-приложение</a></div>
+<script>
+(function () {
+  const url = "https://t.me/Info_aboutyou_bot/aboutme?startapp=a_3QzL1MCHbbvSDcbWc6c9Nj_lp";
+  const webApp = window.Telegram && window.Telegram.WebApp;
+  const fallback = document.getElementById("fallback");
+  try {
+    if (webApp && webApp.initData) {
+      webApp.ready();
+      webApp.openTelegramLink(url);
+    } else {
+      // Not inside Telegram Mini App: use ordinary navigation.
+      window.location.replace(url);
+    }
+  } catch (e) {
+    console.error("Telegram navigation failed", e);
+  }
+  // Some Telegram clients block automatic Mini App navigation without a user gesture.
+  setTimeout(function () { fallback.style.display = "flex"; }, 1600);
+})();
+</script>
+</body>
 </html>
